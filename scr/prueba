@@ -1,0 +1,96 @@
+#include <xc.h> //libreria de XC8 compiler
+#include <stdint.h> //permite tener acceso ilimitado a la memoria del pic para que no haya rebosamiento de datos
+
+// ========================== CONFIGURACIÓN GENERAL ========================
+// Configuraciones que no dependen del modo de oscilador
+#pragma config WDTEN = OFF  // Desactiva el Perro Guardián Watchdog Timer    
+#pragma config LVP = OFF  //Significa "Programación con una sola fuente de alimentación" o "Programación a Bajo Voltaje".      
+#pragma config PBADEN = OFF //(Habilitador Análogo/Digital del Puerto B).  
+#pragma config CP0 = OFF, CP1 = OFF, CP2 = OFF, CP3 = OFF //Proteccion de codigos 
+#pragma config BOREN = OFF  //Reinicio por Caída de Voltaje 
+#pragma config FCMEN = OFF //Habilitador del Monitor de Reloj a Prueba de Fallos    
+#pragma config IESO = OFF  //Cambio entre Oscilador Interno y Externo para estabilizar el arranque del cristal de cuarzo    
+
+// ========================== MODO DE OSCILADOR ==========================
+// 1 = INTOSC interno
+// 2 = Cristal externo HS
+// 3 = RC externo
+#define MODE 2
+
+#if MODE == 1
+    #pragma config FOSC = INTIO67   // Oscilador interno
+    #define USE_PLL 0
+#elif MODE == 2
+    #pragma config FOSC = HSHP     // Cristal HS
+    #pragma config PLLCFG = ON     // Activacion de multiplicador X4
+    #define USE_PLL 1
+#elif MODE == 3
+    #pragma config FOSC = RC       // RC externo
+    #define USE_PLL 0
+#else
+    #error "Modo de oscilador inválido"
+
+#endif
+
+
+// ========================== FRECUENCIA DEL OSCILADOR =====================
+#if MODE == 1 || MODE == 2
+    #if USE_PLL
+        #define _XTAL_FREQ 64000000UL // 16 MHz * 4
+    #else
+        #define _XTAL_FREQ 16000000UL
+    #endif
+#else
+    #define _XTAL_FREQ 16835016UL // Ajustar según resistencia + condensador
+#endif
+
+// ========================== FUNCIONES ==========================
+void delay_ms(uint16_t ms) {
+    while(ms--) {
+        __delay_ms(1);
+    }
+}
+
+void init_pins(void) {
+    // RC0 salida blinker
+    TRISCbits.TRISC0 = 0;
+    LATCbits.LATC0 = 0;
+
+    // RA6 salida CLKO solo si modo lo permite
+    if(MODE == 1  || (MODE == 2 && USE_PLL) ) {
+        TRISAbits.TRISA6 = 0;
+        LATAbits.LATA6 = 0;
+        
+    }
+}
+
+void init_oscillator(void) {
+    OSCCONbits.IRCF = 0b111; // 16 MHz
+    OSCCONbits.SCS = 0b00;   // Bloque de oscilador primario
+    
+    OSCCONbits.OSTS = 1;
+
+    #if USE_PLL == 1
+        OSCTUNEbits.PLLEN = 1;  // Habilita PLL solo si está definido en 1
+        OSCCON2bits.PRISD = 1;  //Habilitar el oscilador externo
+        
+    #else
+        OSCTUNEbits.PLLEN = 0;  // Asegúrate de apagarlo si no se usa
+        OSCCON2bits.PRISD = 0;
+    #endif
+}
+
+// ========================== PROGRAMA PRINCIPAL ==========================
+void main(void) {
+    init_pins();
+    init_oscillator();
+
+    while(1) {
+        // RC0 toggle ? 500 Hz
+        LATCbits.LATC0 = 1;
+        delay_ms(1);
+        LATCbits.LATC0 = 0;
+        delay_ms(1);
+    }
+}
+
