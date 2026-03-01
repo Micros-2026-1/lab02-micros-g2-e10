@@ -3,13 +3,13 @@
 
 // ========================== CONFIGURACIÓN GENERAL ========================
 // Configuraciones que no dependen del modo de oscilador
-#pragma config WDTEN = OFF      
-#pragma config LVP = OFF        
-#pragma config PBADEN = OFF     
-#pragma config CP0 = OFF, CP1 = OFF, CP2 = OFF, CP3 = OFF  
-#pragma config BOREN = OFF      
-#pragma config FCMEN = OFF      
-#pragma config IESO = OFF       
+#pragma config WDTEN = OFF //habilitacion de temporizador de vigilancia     
+#pragma config LVP = OFF  //programacion a bajo voltaje      
+#pragma config PBADEN = OFF //configuracion puerto b que sean digitales y no analogicos    
+#pragma config CP0 = OFF, CP1 = OFF, CP2 = OFF, CP3 = OFF //quitar proteccion del codigo logica invertida off=1 
+#pragma config BOREN = OFF   // reinicio por caida de voltaje 
+#pragma config FCMEN = OFF   //(en este caso esta desactivado) desconecta el cristal roto y enciende el oscilador interno del PIC como emergencia   
+#pragma config IESO = OFF     //metodo para que el cristal de cuarzo pueda arrancar y lo ayude el oscilador interno.  
 
 // ========================== MODO DE OSCILADOR ==========================
 // 1 = INTOSC interno
