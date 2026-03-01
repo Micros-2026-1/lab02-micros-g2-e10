@@ -1,5 +1,5 @@
 #include <xc.h>
-#include <stdint.h>
+#include <stdint.h> //perro
 
 // ========================== CONFIGURACIÓN GENERAL ========================
 // Configuraciones que no dependen del modo de oscilador
