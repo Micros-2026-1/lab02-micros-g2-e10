@@ -1,15 +1,15 @@
-#include <xc.h>
-#include <stdint.h>
+#include <xc.h> //libreria de XC8 compiler
+#include <stdint.h> //permite tener acceso ilimitado a la memoria del pic para que no haya rebosamiento de datos
 
 // ========================== CONFIGURACIÓN GENERAL ========================
 // Configuraciones que no dependen del modo de oscilador
-#pragma config WDTEN = OFF      
-#pragma config LVP = OFF        
-#pragma config PBADEN = OFF     
-#pragma config CP0 = OFF, CP1 = OFF, CP2 = OFF, CP3 = OFF  
-#pragma config BOREN = OFF      
-#pragma config FCMEN = OFF      
-#pragma config IESO = OFF       
+#pragma config WDTEN = OFF  // Desactiva el Perro Guardián Watchdog Timer    
+#pragma config LVP = OFF  //Significa "Programación con una sola fuente de alimentación" o "Programación a Bajo Voltaje".      
+#pragma config PBADEN = OFF //(Habilitador Análogo/Digital del Puerto B).  
+#pragma config CP0 = OFF, CP1 = OFF, CP2 = OFF, CP3 = OFF //Proteccion de codigos 
+#pragma config BOREN = OFF  //Reinicio por Caída de Voltaje 
+#pragma config FCMEN = OFF //Habilitador del Monitor de Reloj a Prueba de Fallos    
+#pragma config IESO = OFF  //Cambio entre Oscilador Interno y Externo para estabilizar el arranque del cristal de cuarzo    
 
 // ========================== MODO DE OSCILADOR ==========================
 // 1 = INTOSC interno
