@@ -7,6 +7,60 @@
 
 ## 2. Documentación
 
+En cualquier sistema digital, el reloj es el elemento que sincroniza todas las operaciones. Sin una señal periódica estable, el sistema no puede ejecutar instrucciones de manera ordenada ni mantener coherencia temporal.
+
+El oscilador es, por tanto, es el corazón del sistema, ya que determina la frecuencia a la que se ejecutan las instrucciones y la velocidad de operación. La elección del tipo de oscilador influye directamente en:
+
+* Precisión de temporización
+
+* Estabilidad del sistema
+
+* Consumo energético
+
+* Costo del diseño
+
+* Complejidad del circuito
+
+En este laboratorio se compararán dos tipos de osciladores: el oscilador interno y el oscilador externo tipo RC. Antes de analizar sus diferencias y resultados, es importante comprender con mayor detalle qué es un oscilador.
+
+**¿Qué es un oscilador?**
+
+Un oscilador es un circuito que genera una señal repetitiva en el tiempo. En sistemas digitales esa señal actúa como reloj. Cada pulso indica cuándo se debe ejecutar una operación.
+
+La frecuencia del oscilador determina la velocidad del sistema. Por ejemplo, si el reloj trabaja a mayor frecuencia, el sistema puede ejecutar más instrucciones por segundo. Si la frecuencia es baja, el sistema será más lento.
+
+Además, muchas funciones dependen directamente del reloj, como:
+
+* Los retardos por software (delay_ms)
+
+* Los temporizadores
+
+* La comunicación serial
+
+* La generación de señales PWM
+
+**Oscilador interno**
+
+El oscilador interno viene integrado dentro del microcontrolador. No necesita resistencias, capacitores ni cristales externos. Se configura por software y permite trabajar a distintas frecuencias.
+
+**¿Qué ventajas tiene?**
+
+* Es fácil de usar.
+
+* No requiere componentes adicionales.
+
+* Reduce el costo del circuito.
+
+* Es bastante estable para la mayoría de aplicaciones.
+
+**Oscilador externo RC**
+
+El oscilador RC externo utiliza una resistencia (R) y un capacitor (C) conectados a los pines de reloj del sistema para generar la señal periódica. La frecuencia generada depende de los valores de estos dos componentes y puede estimarse con la fórmula aproximada:
+
+f ≈ 1 / (4RC)
+
+Esto dandonos a entender que cualquier cambio en la resistencia o el capacitor altera directamente la frecuencia del sistema. A diferencia del oscilador interno, aquí la estabilidad depende de factores físicos externos.
+
 ### 2.1 Descripción del laboratorio
 
 ### 2.2 Explicación del código implementado
