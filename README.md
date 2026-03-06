@@ -109,7 +109,18 @@ Esta configuracion corresponde a un mecanismo que supervisa el funcionamiento de
 * ```#pragma config IESO = OFF```
 Esta configuración está relacionada con el cambio automático entre el oscilador interno y el externo durante el arranque del sistema. Cuando está habilitada, el microcontrolador puede iniciar utilizando el oscilador interno mientras el oscilador externo se estabiliza. En este laboratorio se desactiva para mantener un comportamiento más simple y controlado del reloj del sistema.
 
+Una vez establecidas las configuraciones generales del microcontrolador, el siguiente paso dentro del código consiste en definir el modo de oscilador que utilizará el sistema. Como se mencionó anteriormente, el oscilador es el encargado de generar la señal de reloj que sincroniza la ejecución de las instrucciones, por lo que su configuración tiene una influencia directa en la velocidad y el comportamiento del sistema.
 
+En el código implementado se incluyó una sección que permite seleccionar entre diferentes tipos de oscilador, lo que facilita realizar pruebas y comparar su funcionamiento sin necesidad de modificar gran parte del programa. Para ello se utiliza una constante llamada ```MODE```, la cual determina qué tipo de oscilador será configurado durante la compilación.
+
+![Modos de oscilador del PIC](/imagenes/modos.PNG)
+
+* ```if MODE == 1```
+Establece que cuando mi constante ```MODE``` sea 1, el sistema se configura para utilizar el oscilador interno del microcontrolador. Ademas de usar la directiva ```#pragma config FOSC = INTIO67 ``` para indicar que el oscilador empleado sera el interno; y la directiva ```USE_PLL = 0``` para no emplear el multiplicador de frecuencia.
+
+* ```if MODE == 2 ```
+Cuando la constante ```MODE``` sea 2, el microcontrolador se configura para trabajar con un cristal externo de alta velocidad (```#pragma config FOSC = HSHP```).
+En este caso se emplea la directiva ```#pragma config PLLCFG = ON``` que activa el multiplicador de frecuencia PLL, el cual permite aumentar la frecuencia del reloj multiplicándola internamente y finalmente se establece ```USE_PLL = 1``` para emplear el multiplicador de frecuencia.
 
 
 ### 2.3 Análisis y comparación
