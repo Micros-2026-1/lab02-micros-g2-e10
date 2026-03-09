@@ -68,6 +68,7 @@ Esto dandonos a entender que cualquier cambio en la resistencia o el capacitor a
 ### 2.1 Descripción del laboratorio
 
 
+
 ### 2.2 Explicación del código implementado
 
 Una vez comprendido el papel del oscilador dentro del sistema y su influencia en la velocidad y sincronización del microcontrolador, es importante analizar cómo estas configuraciones se implementan a nivel de programación. Para ello, a continuación se presenta el código desarrollado para este laboratorio, en el cual se realiza la configuración del microcontrolador y del tipo de oscilador utilizado. Además, se explicará el funcionamiento de cada una de las secciones del programa, con el fin de entender cómo el código permite controlar el comportamiento del sistema y ejecutar las instrucciones de manera adecuada durante la práctica.
@@ -178,7 +179,7 @@ Esto ayuda a evitar configuraciones innecesarias o posibles conflictos en el fun
 
 Para finalizar abarcaremos el programa principal, el cual, tiene como punto de inicio la función main.}
 
-[configuracion de oscilador](/imagenes/programa.PNG)
+![configuracion de oscilador](/imagenes/programa.PNG)
 
 En esta parte del código se llaman primero las funciones encargadas de inicializar los pines y el oscilador. Esto garantiza que el microcontrolador esté correctamente configurado antes de ejecutar la lógica principal del programa.
 Posteriormente el programa entra en un bucle infinito donde se ejecuta la tarea principal del sistema.
@@ -219,6 +220,28 @@ Esta señal puede utilizarse para diferentes aplicaciones, como el parpadeo de u
 <!-- Complemente con análisis de lo registrado en tablas -->
 
 ## 2.4 Diagramas
+
+
+<p align="center">
+<img src="imagenes/HS.PNG" alt="esp11" width="450">
+</p>
+<p align="center">
+  Diagrama oscilador externo HS <b>[1]</b>
+</p>
+
+<p align="center">
+<img src="imagenes/RC.PNG" alt="esp11" width="450">
+</p>
+<p align="center">
+  Diagrama oscilador externo RC <b>[1]</b>
+</p>
+
+<p align="center">
+<img src="imagenes/RC.PNG" alt="esp11" width="450">
+</p>
+<p align="center">
+  Diagrama señal externa <b>[1]</b>
+</p>
 
 ## 2.5 Formas de onda
 
