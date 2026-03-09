@@ -122,6 +122,70 @@ Establece que cuando mi constante ```MODE``` sea 1, el sistema se configura para
 Cuando la constante ```MODE``` sea 2, el microcontrolador se configura para trabajar con un cristal externo de alta velocidad (```#pragma config FOSC = HSHP```).
 En este caso se emplea la directiva ```#pragma config PLLCFG = ON``` que activa el multiplicador de frecuencia PLL, el cual permite aumentar la frecuencia del reloj multiplicándola internamente y finalmente se establece ```USE_PLL = 1``` para emplear el multiplicador de frecuencia.
 
+* ```if MODE == 3 ```
+Cuando en este modo la constante ```MODE``` sea 3, el sistema configurará el microcontrolador para trabajar con un oscilador RC externo. Esto se define mediante la instrucción ```#pragma config FOSC = RC```, que indica al hardware que el reloj del sistema se obtendrá de un circuito formado por una resistencia y un condensador conectados externamente.
+En este mismo bloque también se define``` USE_PLL``` con valor 0, lo que significa que el multiplicador de frecuencia PLL no se utilizará en este modo.
+Finalmente, en esta sección del código se implementa una línea de código, la cual establece que, si el valor de ```MODE``` no coincide con ninguno de los modos definidos en el programa, el compilador mostrará un error indicando que el modo de oscilador es inválido. Esto sirve como una especie de protección para evitar compilar el programa con una configuración incorrecta.
+
+**Definición de Frecuencia del oscilador**
+
+![Modos de oscilador del PIC](/imagenes/Frecuencia.PNG)
+
+En esta parte se define la constante``` _XTAL_FREQ```, que representa la frecuencia a la que trabaja el microcontrolador.
+Esta constante es muy importante porque el compilador la utiliza para calcular correctamente los tiempos de las funciones de retardo como __delay_ms().
+El código contempla varias situaciones. Si el programa está funcionando en los modos 1 o 2, primero se revisa si el PLL está habilitado. Si el PLL está activo, la frecuencia del sistema se multiplica y llega a 64 MHz. Si el PLL no está habilitado, la frecuencia se mantiene en 16 MHz.
+
+**Division de funciones**
+
+![delay](/imagenes/delay.PNG)
+
+En esta sección del código se definen varias funciones, entre ellas se encuentra la siguiente función que se muestra, esta permite generar retardos en milisegundos.
+La función ```delay_ms``` recibe como parámetro una variable que indica la cantidad de milisegundos que se desea esperar. Internamente se utiliza un ciclo while que se ejecuta hasta que el contador llega a cero.
+En cada iteración del ciclo se llama a la función ```__delay_ms(1)```, que produce un retardo de un milisegundo. De esta forma, si se llama a la función con un valor de 10, el programa generará un retardo total de aproximadamente 10 milisegundos.
+
+* ```Establecimiento de pines```
+
+Antes de utilizar los pines del microcontrolador, es necesario configurarlos correctamente como entradas o salidas. Para este propósito se define la función init_pins.
+
+![pines](/imagenes/init.PNG)
+
+En este caso se configura el pin RC0 como salida digital. Esto se realiza modificando el registro TRISC, donde un valor de 0 indica que el pin funcionará como salida.
+Posteriormente se utiliza el registro LATC para establecer el estado inicial del pin, colocándolo en nivel bajo. Esto asegura que el pin comience en un estado conocido cuando el programa se ejecute.
+
+Dentro de la misma función de inicialización de pines, se incluye una condición para configurar el pin RA6 solo cuando el modo de funcionamiento lo permite.
+En este fragmento se verifica si el sistema está trabajando en un modo que permite utilizar el pin RA6 como salida. Si la condición se cumple, el pin se configura como salida digital y se inicializa en nivel bajo.
+
+* ```Oscilador```
+
+Una vez configurados los pines, el siguiente paso consiste en preparar el sistema de reloj del microcontrolador. Esto se realiza mediante la función ```init_oscillator```.
+
+![configuracion de oscilador](/imagenes/oscilador.PNG)
+
+En este bloque se configura el registro ```OSCCON```, que controla diferentes aspectos del oscilador interno del microcontrolador. El campo ```IRCF``` se establece en el valor 0b111, lo que indica que el oscilador interno operará a una frecuencia de 16 MHz.
+Posteriormente se configura el campo ```SCS```, el cual determina la fuente de reloj del sistema. En este caso se selecciona el oscilador primario como fuente principal.
+
+* ```PLL```
+
+En esta sección se verifica si el PLL debe activarse o mantenerse desactivado.
+
+[PLL](/imagenes/PLL.PNG)
+
+Si el valor de ```USE_PLL``` es igual a 1, el programa habilita el PLL mediante el registro ```OSCTUNE```. Esto permite multiplicar la frecuencia del reloj del sistema.
+En caso contrario, el programa se asegura de que el PLL permanezca desactivado.
+Esto ayuda a evitar configuraciones innecesarias o posibles conflictos en el funcionamiento del sistema.
+
+**Programa principal**
+
+Para finalizar abarcaremos el programa principal, el cual, tiene como punto de inicio la función main.}
+
+[configuracion de oscilador](/imagenes/programa.PNG)
+
+En esta parte del código se llaman primero las funciones encargadas de inicializar los pines y el oscilador. Esto garantiza que el microcontrolador esté correctamente configurado antes de ejecutar la lógica principal del programa.
+Posteriormente el programa entra en un bucle infinito donde se ejecuta la tarea principal del sistema.
+Dentro de este ciclo el pin RC0 cambia constantemente de estado. Primero se establece en nivel alto y se mantiene así durante un milisegundo. Luego se coloca en nivel bajo durante otro milisegundo.
+Este proceso se repite continuamente, generando una señal cuadrada en el pin RC0. Debido a que cada ciclo completo dura aproximadamente dos milisegundos, la señal resultante tiene una frecuencia cercana a 500 Hz.
+Esta señal puede utilizarse para diferentes aplicaciones, como el parpadeo de un LED, la generación de señales de prueba o la verificación del funcionamiento del sistema de reloj del microcontrolador.
+
 
 ### 2.3 Análisis y comparación
 
