@@ -74,13 +74,13 @@ Una vez comprendido el papel del oscilador dentro del sistema y su influencia en
 
 En la primera parte del código se pueden observar las siguientes instrucciones:
 
-![Configuracion librerias](imagenes/librerias.PNG)
+![Configuracion librerias](/imagenes/librerias.png)
 
 En esta sección se incluyen las primeras líneas del programa, cuya función es incorporar las librerías necesarias para la correcta compilación y ejecución del código. El comando ```#include <xc.h>``` permite acceder a las definiciones y configuraciones propias del compilador, en este caso es el compilador XC8. Por otro lado, la librería ```#include <stdint.h>``` proporciona tipos de datos enteros de tamaño definido, lo que ayuda a manejar la memoria de forma más controlada y evita posibles desbordamientos de datos durante la ejecución del programa.
 
 Una vez incorporadas las librerías necesarias, la siguiente parte del código se encarga de realizar la configuración inicial del sistema, permitiendo establecer los parámetros que controlarán el funcionamiento del microcontrolador durante la ejecución del programa.
 
-![Configuracion generales del PIC](/imagenes/configuraciones.PNG)
+![Configuracion generales del PIC](/imagenes/configuraciones.png)
 
 Para comprender cómo funcionan estas configuraciones iniciales del sistema, es necesario analizar a qué corresponde cada una de las instrucciones presentes en el código. En este caso, varias de ellas comienzan con la palabra ```#Pragma```, la cual se utiliza para indicarle al compilador que debe aplicar ciertas configuraciones al microcontrolador antes de generar el programa final. Dicho de otra forma, estas instrucciones permiten definir algunos parámetros internos que determinan cómo se comportará el sistema cuando el programa empiece a ejecutarse.
 
@@ -113,7 +113,7 @@ Una vez establecidas las configuraciones generales del microcontrolador, el sigu
 
 En el código implementado se incluyó una sección que permite seleccionar entre diferentes tipos de oscilador, lo que facilita realizar pruebas y comparar su funcionamiento sin necesidad de modificar gran parte del programa. Para ello se utiliza una constante llamada ```MODE```, la cual determina qué tipo de oscilador será configurado durante la compilación.
 
-![Modos de oscilador del PIC](/imagenes/modos.PNG)
+![Modos de oscilador del PIC](/imagenes/modos.png)
 
 * ```if MODE == 1```
 Establece que cuando mi constante ```MODE``` sea 1, el sistema se configura para utilizar el oscilador interno del microcontrolador. Ademas de usar la directiva ```#pragma config FOSC = INTIO67 ``` para indicar que el oscilador empleado sera el interno; y la directiva ```USE_PLL = 0``` para no emplear el multiplicador de frecuencia.
@@ -129,7 +129,7 @@ Finalmente, en esta sección del código se implementa una línea de código, la
 
 **Definición de Frecuencia del oscilador**
 
-![Modos de oscilador del PIC](/imagenes/Frecuencia.PNG)
+![Modos de oscilador del PIC](/imagenes/Frecuencia.png)
 
 En esta parte se define la constante``` _XTAL_FREQ```, que representa la frecuencia a la que trabaja el microcontrolador.
 Esta constante es muy importante porque el compilador la utiliza para calcular correctamente los tiempos de las funciones de retardo como __delay_ms().
@@ -137,7 +137,7 @@ El código contempla varias situaciones. Si el programa está funcionando en los
 
 **Division de funciones**
 
-![delay](/imagenes/delay.PNG)
+![delay](/imagenes/delay.png)
 
 En esta sección del código se definen varias funciones, entre ellas se encuentra la siguiente función que se muestra, esta permite generar retardos en milisegundos.
 La función ```delay_ms``` recibe como parámetro una variable que indica la cantidad de milisegundos que se desea esperar. Internamente se utiliza un ciclo while que se ejecuta hasta que el contador llega a cero.
@@ -147,7 +147,7 @@ En cada iteración del ciclo se llama a la función ```__delay_ms(1)```, que pro
 
 Antes de utilizar los pines del microcontrolador, es necesario configurarlos correctamente como entradas o salidas. Para este propósito se define la función init_pins.
 
-![pines](/imagenes/init.PNG)
+![pines](/imagenes/init.png)
 
 En este caso se configura el pin RC0 como salida digital. Esto se realiza modificando el registro TRISC, donde un valor de 0 indica que el pin funcionará como salida.
 Posteriormente se utiliza el registro LATC para establecer el estado inicial del pin, colocándolo en nivel bajo. Esto asegura que el pin comience en un estado conocido cuando el programa se ejecute.
@@ -159,7 +159,7 @@ En este fragmento se verifica si el sistema está trabajando en un modo que perm
 
 Una vez configurados los pines, el siguiente paso consiste en preparar el sistema de reloj del microcontrolador. Esto se realiza mediante la función ```init_oscillator```.
 
-![configuracion de oscilador](/imagenes/oscilador.PNG)
+![configuracion de oscilador](//imagenes/oscilador.png)
 
 En este bloque se configura el registro ```OSCCON```, que controla diferentes aspectos del oscilador interno del microcontrolador. El campo ```IRCF``` se establece en el valor 0b111, lo que indica que el oscilador interno operará a una frecuencia de 16 MHz.
 Posteriormente se configura el campo ```SCS```, el cual determina la fuente de reloj del sistema. En este caso se selecciona el oscilador primario como fuente principal.
@@ -168,7 +168,7 @@ Posteriormente se configura el campo ```SCS```, el cual determina la fuente de r
 
 En esta sección se verifica si el PLL debe activarse o mantenerse desactivado.
 
-[PLL](/imagenes/PLL.PNG)
+[PLL](/imagenes/PLL.png)
 
 Si el valor de ```USE_PLL``` es igual a 1, el programa habilita el PLL mediante el registro ```OSCTUNE```. Esto permite multiplicar la frecuencia del reloj del sistema.
 En caso contrario, el programa se asegura de que el PLL permanezca desactivado.
@@ -178,7 +178,7 @@ Esto ayuda a evitar configuraciones innecesarias o posibles conflictos en el fun
 
 Para finalizar abarcaremos el programa principal, el cual, tiene como punto de inicio la función main.}
 
-![configuracion de oscilador](/imagenes/programa.PNG)
+![configuracion de oscilador](/imagenes/programa.png)
 
 En esta parte del código se llaman primero las funciones encargadas de inicializar los pines y el oscilador. Esto garantiza que el microcontrolador esté correctamente configurado antes de ejecutar la lógica principal del programa.
 Posteriormente el programa entra en un bucle infinito donde se ejecuta la tarea principal del sistema.
@@ -222,7 +222,7 @@ Esta señal puede utilizarse para diferentes aplicaciones, como el parpadeo de u
 
 
 <p align="center">
-<img src="imagenes/HS.PNG" alt="esp11" width="450">
+<img src="/imagenes/HS.png" alt="esp11" width="450">
 </p>
 <p align="center">
   Diagrama oscilador externo HS <b>[1]</b>
@@ -240,7 +240,7 @@ Esta señal puede utilizarse para diferentes aplicaciones, como el parpadeo de u
 ### INTOSC (interno) 
 
 <p align="center">
-<img src="imagenes/RA6.PNG" alt="esp11" width="450">
+<img src="/imagenes/RA6.png" alt="esp11" width="450">
 </p>
 <p align="center">
   Onda oscilador interno <b>[1]</b>
@@ -249,7 +249,7 @@ Esta señal puede utilizarse para diferentes aplicaciones, como el parpadeo de u
 ### HS
 
 <p align="center">
-<img src="imagenes/CRISTAL.PNG" alt="esp11" width="450">
+<img src="/imagenes/CRISTAL.png" alt="esp11" width="450">
 </p>
 <p align="center">
   Onda cristal config HS <b>[1]</b>
@@ -258,7 +258,7 @@ Esta señal puede utilizarse para diferentes aplicaciones, como el parpadeo de u
 ## RC
 
 <p align="center">
-<img src="imagenes/RC2.PNG" alt="esp11" width="450">
+<img src="/imagenes/RC2.png" alt="esp11" width="450">
 </p>
 <p align="center">
   Onda RC <b>[1]</b>
@@ -268,7 +268,7 @@ Esta señal puede utilizarse para diferentes aplicaciones, como el parpadeo de u
 ## 3. Evidencias de implementación
 
 <p align="center">
-<img src="imagenes/implementacion.PNG" alt="esp11" width="450">
+<img src="/imagenes/implementacion.png" alt="esp11" width="450">
 </p>
 <p align="center">
   Montaje <b>[1]</b>
