@@ -68,14 +68,13 @@ Esto dandonos a entender que cualquier cambio en la resistencia o el capacitor a
 ### 2.1 Descripción del laboratorio
 
 
-
 ### 2.2 Explicación del código implementado
 
 Una vez comprendido el papel del oscilador dentro del sistema y su influencia en la velocidad y sincronización del microcontrolador, es importante analizar cómo estas configuraciones se implementan a nivel de programación. Para ello, a continuación se presenta el código desarrollado para este laboratorio, en el cual se realiza la configuración del microcontrolador y del tipo de oscilador utilizado. Además, se explicará el funcionamiento de cada una de las secciones del programa, con el fin de entender cómo el código permite controlar el comportamiento del sistema y ejecutar las instrucciones de manera adecuada durante la práctica.
 
 En la primera parte del código se pueden observar las siguientes instrucciones:
 
-![Configuracion librerias](/imagenes/librerias.PNG)
+![Configuracion librerias](imagenes/librerias.PNG)
 
 En esta sección se incluyen las primeras líneas del programa, cuya función es incorporar las librerías necesarias para la correcta compilación y ejecución del código. El comando ```#include <xc.h>``` permite acceder a las definiciones y configuraciones propias del compilador, en este caso es el compilador XC8. Por otro lado, la librería ```#include <stdint.h>``` proporciona tipos de datos enteros de tamaño definido, lo que ayuda a manejar la memoria de forma más controlada y evita posibles desbordamientos de datos durante la ejecución del programa.
 
@@ -230,29 +229,51 @@ Esta señal puede utilizarse para diferentes aplicaciones, como el parpadeo de u
 </p>
 
 <p align="center">
-<img src="imagenes/RC.PNG" alt="esp11" width="450">
+<img src="/imagenes/RC.png" alt="esp11" width="450">
 </p>
 <p align="center">
   Diagrama oscilador externo RC <b>[1]</b>
-</p>
-
-<p align="center">
-<img src="imagenes/RC.PNG" alt="esp11" width="450">
-</p>
-<p align="center">
-  Diagrama señal externa <b>[1]</b>
 </p>
 
 ## 2.5 Formas de onda
 
 ### INTOSC (interno) 
 
+<p align="center">
+<img src="imagenes/RA6.PNG" alt="esp11" width="450">
+</p>
+<p align="center">
+  Onda oscilador interno <b>[1]</b>
+</p>
 
 ### HS
 
+<p align="center">
+<img src="imagenes/CRISTAL.PNG" alt="esp11" width="450">
+</p>
+<p align="center">
+  Onda cristal config HS <b>[1]</b>
+</p>
+
 ## RC
 
+<p align="center">
+<img src="imagenes/RC2.PNG" alt="esp11" width="450">
+</p>
+<p align="center">
+  Onda RC <b>[1]</b>
+</p>
+
+
 ## 3. Evidencias de implementación
+
+<p align="center">
+<img src="imagenes/implementacion.PNG" alt="esp11" width="450">
+</p>
+<p align="center">
+  Montaje <b>[1]</b>
+</p>
+
 
 ## 4. Preguntas
 
