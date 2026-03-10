@@ -288,11 +288,9 @@ Esta señal puede utilizarse para diferentes aplicaciones, como el parpadeo de u
 
 * ¿En qué modo se obtuvo la medición más cercana a la frecuencia teórica?
 
-El modo en el que se obtuvo una frecuencia más cercana a la frecuencia teórica fue el del interno. Esto se debe a que, en las otras configuraciones, se empleó el PLL para multiplicar la señal, lo que puede introducir pequeñas variaciones o desviaciones con respecto al valor teórico esperado.
+El modo en el que se obtuvo una frecuencia más cercana a la frecuencia teórica fue el del interno. Esto se debe a que, en las otras configuraciones, se presentan una frecuencia menos precisa e inestable.
 
 * ¿Fue posible evidenciar el fenómeno de deriva? ¿Qué factores podrían explicar la variación de frecuencia al calentar el PIC?
-
-
 
 * ¿Cuál es más preciso en cuanto a frecuencia teórica vs. medida?
 
