@@ -243,19 +243,19 @@ Esta señal puede utilizarse para diferentes aplicaciones, como el parpadeo de u
 ### INTOSC (interno) 
 
 <p align="center">
-<img src="/imagenes/RA6.png" alt="esp11" width="450">
+<img src="/imagenes/CRISTAL.png" alt="esp11" width="450">
 </p>
 <p align="center">
-  Onda oscilador interno <b>[1]</b>
+ Onda oscilador interno  <b>[1]</b>
 </p>
 
 ### HS
 
 <p align="center">
-<img src="/imagenes/CRISTAL.png" alt="esp11" width="450">
+<img src="/imagenes/RA6.png" alt="esp11" width="450">
 </p>
 <p align="center">
-  Onda cristal config HS <b>[1]</b>
+  Onda cristal config HS  <b>[1]</b>
 </p>
 
 ## RC
@@ -282,15 +282,47 @@ Esta señal puede utilizarse para diferentes aplicaciones, como el parpadeo de u
 
 * ¿En qué modo se obtuvo la medición más cercana a la frecuencia teórica?
 
+El modo en el que se obtuvo una frecuencia más cercana a la frecuencia teórica fue el del interno. Esto se debe a que, en las otras configuraciones, se empleó el PLL para multiplicar la señal, lo que puede introducir pequeñas variaciones o desviaciones con respecto al valor teórico esperado.
+
 * ¿Fue posible evidenciar el fenómeno de deriva? ¿Qué factores podrían explicar la variación de frecuencia al calentar el PIC?
+
+
 
 * ¿Cuál es más preciso en cuanto a frecuencia teórica vs. medida?
 
 
+
 * Explique cómo usar RC0 para estimar la frecuencia del oscilador cuando RA6 no está disponible.
+
+
 
 * Si se quisiera duplicar la frecuencia del PIC usando PLL, ¿en qué modos se podría aplicar?
 
+Esta amplificacion de la señal se podria emplear en aquellos modos donde tenemos activo nuestro PLL en este caso seria en la conmfiguracion ``` MODE == 2 ```.
+
 * Enliste ventajas y desventajas de cada modo.
+    * OSCILADOR RC 
+         * Los osciladores de desplazamiento de fase RC no requieren ningún tipo de retroalimentación negativa ni disposiciones de estabilización.
+        * En el rango de audio, es útil para las frecuencias.
+        * Tiene un circuito simple.
+        * Tiene un amplio rango de frecuencia.
+        * El oscilador de desplazamiento de fase RC proporciona una buena estabilidad de frecuencia.
+        * La salida de este circuito es sinusoidal, es decir, tiene poca distorsión.
+        * Es adecuado para frecuencias más bajas y este límite inferior existe tan solo en 1 Hz.
+Existen algunas desventajas del oscilador de desplazamiento de fase RC que se detallan a continuación.
+El oscilador de cambio de fase RC requiere un Vcc alto para una retroalimentación grande.
+Los osciladores de desplazamiento de fase RC dificultan que el circuito inicie oscilaciones.
+La salida es pequeña debido a la menor retroalimentación.
+Tiene poca estabilidad de frecuencia.
+
 
 ## 5. Referencias
+[1] Microchip Technology Inc. (2019). *PIC18F2455/2550/4455/4550 Data Sheet: 28/40/44-Pin High-Performance, Enhanced Flash Microcontrollers with USB*. Disponible en: https://www.microchip.com
+
+[2] Sedra, A. S., & Smith, K. C. (2015). *Microelectronic Circuits* (7th ed.). Oxford University Press.
+
+[3] Floyd, T. L. (2017). *Electronic Devices* (10th ed.). Pearson Education.
+
+[4] Horowitz, P., & Hill, W. (2015). *The Art of Electronics* (3rd ed.). Cambridge University Press.
+
+[5] Boylestad, R. L., & Nashelsky, L. (2013). *Electronic Devices and Circuit Theory* (11th ed.). Pearson.
