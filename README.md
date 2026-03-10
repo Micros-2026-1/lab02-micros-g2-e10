@@ -261,12 +261,18 @@ Esta señal puede utilizarse para diferentes aplicaciones, como el parpadeo de u
 ## RC
 
 <p align="center">
-<img src="/imagenes/RC2.png" alt="esp11" width="450">
+<img src="/imagenes/salida oscilador 1 rc.png" alt="esp11" width="450">
 </p>
 <p align="center">
-  Onda RC <b>[1]</b>
+  Onda RC salida OSC 1<b>[1]</b>
 </p>
 
+<p align="center">
+<img src="/imagenes/salida oscilador 2 rc.png" alt="esp11" width="450">
+</p>
+<p align="center">
+  Onda RC salida OSC 2 <b>[1]</b>
+</p>
 
 ## 3. Evidencias de implementación
 
@@ -301,7 +307,13 @@ El modo en el que se obtuvo una frecuencia más cercana a la frecuencia teórica
 Esta amplificacion de la señal se podria emplear en aquellos modos donde tenemos activo nuestro PLL en este caso seria en la conmfiguracion ``` MODE == 2 ```.
 
 * Enliste ventajas y desventajas de cada modo.
-    * OSCILADOR RC 
+    * ```Oscilador interno PIC ```
+
+
+
+
+
+    * ```Oscilador RC ```
          * Los osciladores de desplazamiento de fase RC no requieren ningún tipo de retroalimentación negativa ni disposiciones de estabilización.
         * En el rango de audio, es útil para las frecuencias.
         * Tiene un circuito simple.
