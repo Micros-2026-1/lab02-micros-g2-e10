@@ -119,7 +119,7 @@ En el código implementado se incluyó una sección que permite seleccionar entr
 ![Modos de oscilador del PIC](/imagenes/modos.png)
 
 * ```if MODE == 1```
-Establece que cuando mi constante ```MODE``` sea 1, el sistema se configura para utilizar el oscilador interno del microcontrolador. Ademas de usar la directiva ```#pragma config FOSC = INTIO67 ``` para indicar que el oscilador empleado sera el interno; y la directiva ```USE_PLL = 0``` para no emplear el multiplicador de frecuencia.
+Establece que cuando mi constante ```MODE``` sea 1, el sistema se configura para utilizar el oscilador interno del microcontrolador. Ademas de usar la directiva ```#pragma config FOSC = INTIO7 ``` para indicar que el oscilador empleado sera el interno; y la directiva ```USE_PLL = 0``` para no emplear el multiplicador de frecuencia.
 
 * ```if MODE == 2 ```
 Cuando la constante ```MODE``` sea 2, el microcontrolador se configura para trabajar con un cristal externo de alta velocidad (```#pragma config FOSC = HSHP```).
@@ -304,28 +304,60 @@ El modo en el que se obtuvo una frecuencia más cercana a la frecuencia teórica
 
 * Si se quisiera duplicar la frecuencia del PIC usando PLL, ¿en qué modos se podría aplicar?
 
-Esta amplificacion de la señal se podria emplear en aquellos modos donde tenemos activo nuestro PLL en este caso seria en la conmfiguracion ``` MODE == 2 ```.
+    Esta amplificacion de la señal se podria emplear en aquellos modos donde tenemos activo nuestro PLL en este caso seria en la conmfiguracion ``` MODE == 2 ```.
 
 * Enliste ventajas y desventajas de cada modo.
-    * ```Oscilador interno PIC ```
+
+* ```Oscilador interno PIC ```
+    
+**Ventajas**
+
+   * Menor cantidad de componentes externos, no es necesario utilizar cristal, resonador o red RC externa.
+   * Coste reducido del sistema.
+   * Diseño más simple y compacto.
+   * Arranque más rápido por sus componentes ya se encuentran integrados.
+   * Posibilidad de ajustar la frecuencia por software.
+
+**Desventajas**
+   * Menor precisión en la frecuencia.
+   * Frecuencia máxima más limitada
+   * Menor estabilidad debido a temperatura, voltaje de alimentación y variaciones del proceso de fabricación.
+   * Limitaciones en aplicaciones de alta precisión
 
 
+* ```Oscilador RC ```
 
+     **Ventajas**
 
+    * Los osciladores de desplazamiento de fase RC no requieren ningún tipo de retroalimentación negativa ni disposiciones de estabilización.
+    * En el rango de audio, es útil para las frecuencias.
+    * Tiene un circuito simple.
+    * Tiene un amplio rango de frecuencia.
+    * El oscilador de desplazamiento de fase RC proporciona una buena estabilidad de frecuencia.
+    * La salida de este circuito es sinusoidal, es decir, tiene poca distorsión.
+    * Es adecuado para frecuencias más bajas y este límite inferior existe tan solo en 1 Hz.
+    
+    **Desventajas**
+    
+    * El oscilador de cambio de fase RC requiere un Vcc alto para una retroalimentación grande.
+    * Los osciladores de desplazamiento de fase RC dificultan que el circuito inicie oscilaciones.
+    * La salida es pequeña debido a la menor retroalimentación.
+    * Tiene poca estabilidad de frecuencia.
 
-    * ```Oscilador RC ```
-         * Los osciladores de desplazamiento de fase RC no requieren ningún tipo de retroalimentación negativa ni disposiciones de estabilización.
-        * En el rango de audio, es útil para las frecuencias.
-        * Tiene un circuito simple.
-        * Tiene un amplio rango de frecuencia.
-        * El oscilador de desplazamiento de fase RC proporciona una buena estabilidad de frecuencia.
-        * La salida de este circuito es sinusoidal, es decir, tiene poca distorsión.
-        * Es adecuado para frecuencias más bajas y este límite inferior existe tan solo en 1 Hz.
-Existen algunas desventajas del oscilador de desplazamiento de fase RC que se detallan a continuación.
-El oscilador de cambio de fase RC requiere un Vcc alto para una retroalimentación grande.
-Los osciladores de desplazamiento de fase RC dificultan que el circuito inicie oscilaciones.
-La salida es pequeña debido a la menor retroalimentación.
-Tiene poca estabilidad de frecuencia.
+* ```Oscilador Cristal Externo ```
+
+     **Ventajas**
+
+    * Alta precisión en la frecuencia.
+    * Poca variacion en la freciuencia.
+    * Adecuado para protocolos de comunicacion precisa.
+    * Ideal para trabajos que requieran sincronizacion precisa.
+       
+    **Desventajas**
+    
+    * Costo elevado por compra de componentes adicionales.
+    * Mayor número de componentes.
+    * Tiempo de arranque mayor.
 
 
 ## 5. Referencias
@@ -338,3 +370,5 @@ Tiene poca estabilidad de frecuencia.
 [4] Horowitz, P., & Hill, W. (2015). *The Art of Electronics* (3rd ed.). Cambridge University Press.
 
 [5] Boylestad, R. L., & Nashelsky, L. (2013). *Electronic Devices and Circuit Theory* (11th ed.). Pearson.
+
+[6] Semiconductor For You, “Advantages and Disadvantages of RC Phase Shift Oscillator,” 2017. [En línea]. Disponible en: https://www.semiconductorforu.com advantages-disadvantages-rc-phase-shift-oscillator/.
