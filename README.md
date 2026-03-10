@@ -67,6 +67,9 @@ Esto dandonos a entender que cualquier cambio en la resistencia o el capacitor a
 
 ### 2.1 Descripción del laboratorio
 
+Este laboratorio tiene como objetivo comparar el comportamiento de diferentes configuraciones que pueden emplearse para implementar un oscilador. Para ello, se realizarán los cálculos teóricos correspondientes a cada configuración y posteriormente se contrastarán con los resultados obtenidos en la práctica.
+
+El propósito de esta comparación es evaluar qué tan precisos son los resultados experimentales con respecto a los cálculos realizados. Además, se analizará el comportamiento de las señales generadas mediante el uso del osciloscopio, lo que permitirá observar y estudiar las características de cada configuración de oscilador.
 
 ### 2.2 Explicación del código implementado
 
@@ -159,7 +162,7 @@ En este fragmento se verifica si el sistema está trabajando en un modo que perm
 
 Una vez configurados los pines, el siguiente paso consiste en preparar el sistema de reloj del microcontrolador. Esto se realiza mediante la función ```init_oscillator```.
 
-![configuracion de oscilador](//imagenes/oscilador.png)
+![configuracion de oscilador](/imagenes/oscilador.png)
 
 En este bloque se configura el registro ```OSCCON```, que controla diferentes aspectos del oscilador interno del microcontrolador. El campo ```IRCF``` se establece en el valor 0b111, lo que indica que el oscilador interno operará a una frecuencia de 16 MHz.
 Posteriormente se configura el campo ```SCS```, el cual determina la fuente de reloj del sistema. En este caso se selecciona el oscilador primario como fuente principal.
