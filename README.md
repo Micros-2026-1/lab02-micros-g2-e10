@@ -45,6 +45,8 @@ Además, muchas funciones dependen directamente del reloj, como:
 
 **Oscilador interno**
 
+![Datasheet oscilador interno](/imagenes/Osc_int.png)
+
 El oscilador interno viene integrado dentro del microcontrolador. No necesita resistencias, capacitores ni cristales externos. Se configura por software y permite trabajar a distintas frecuencias.
 
 **¿Qué ventajas tiene?**
@@ -57,7 +59,23 @@ El oscilador interno viene integrado dentro del microcontrolador. No necesita re
 
 * Es bastante estable para la mayoría de aplicaciones.
 
+**Oscilador externo cristal de cuarzo**
+
+![Datasheet Crystal](/imagenes/Crystal.png)
+
+El oscilador Externo de cristal de cuarzo es un material que cuando le aplicas electricidad, vibra  a una frecuencia determinada por el fabricante.
+
+Aunque la mayoría de los microcontroladores tienen un oscilador interno, el externo es preferido por tres razones simples:
+
+* Precisión extrema: El interno es como un reloj de pared barato que se atrasa; el externo es como un cronómetro profesional.
+
+* Inmune al clima: El interno falla si hace mucho calor o frío. El cristal externo mantiene el mismo ritmo sin importar la temperatura.
+
+* Sincronización: Si necesitas que dos dispositivos se entiendan perfectamente (como en puertos USB o Bluetooth), ambos deben seguir el mismo ritmo exacto que solo un oscilador externo puede dar.
+
 **Oscilador externo RC**
+
+![Datasheet RC](/imagenes/Rc_1.png)
 
 El oscilador RC externo utiliza una resistencia (R) y un capacitor (C) conectados a los pines de reloj del sistema para generar la señal periódica. La frecuencia generada depende de los valores de estos dos componentes y puede estimarse con la fórmula aproximada:
 
@@ -171,7 +189,7 @@ Posteriormente se configura el campo ```SCS```, el cual determina la fuente de r
 
 En esta sección se verifica si el PLL debe activarse o mantenerse desactivado.
 
-[PLL](/imagenes/PLL.png)
+![PLL](/imagenes/Pll.png)
 
 Si el valor de ```USE_PLL``` es igual a 1, el programa habilita el PLL mediante el registro ```OSCTUNE```. Esto permite multiplicar la frecuencia del reloj del sistema.
 En caso contrario, el programa se asegura de que el PLL permanezca desactivado.
@@ -196,25 +214,28 @@ Esta señal puede utilizarse para diferentes aplicaciones, como el parpadeo de u
 
 | Modo de oscilador | Freq. teórica Fosc | RA6 medible (CLKO)? | Freq. medida RA6 (Hz) | Freq. teórica RC0 (Hz)| Freq. medida RC0 (Hz) | Error RC0 (%) |  
 |------------------|------------------|---------------------|---------------|---------------------|---------------|---------------|
-| INTOSC (interno) | 16,000,000       | Sí                 |                     |                500                 |               |               | |
-| HS (cristal externo 16 MHz) | 16,000,000 | No |     NA      |               500                 |               |               |
-| RC externo       | ~16,000,000*     | No                                    |       N/A        | 500                 |               |               | |
+| INTOSC (interno) | 16,000,000       | Sí                 |   4 MHz      | 500   | 497 Hz              |               | |
+| HS (cristal externo 16 MHz) | 16,000,000 | No |     NA      |               500                 |      499 Hz         |               |
+| RC externo       | ~7,570,000*     | Si                                    |       2,079 MHz        | 500                 |  539 Hz             |               | |
+
+**Analisis Tabla 1**
+
 
 #### Tabla 2: Medición con calor
 
 | Modo de oscilador | Freq. teórica Fosc | RA6 medible (CLKO)? | Freq. medida RA6 (Hz) | Freq. teórica RC0 (Hz)| Freq. medida RC0 (Hz) | Error RC0 (%) |  
 |------------------|------------------|---------------------|---------------|---------------------|---------------|---------------|
-| INTOSC (interno) | 16,000,000       | Sí                 |                     |                500                 |               |               | |
-| HS (cristal externo 16 MHz) | 16,000,000 | No |     NA      |               500                 |               |               |
-| RC externo       | ~16,000,000*     | No                                    |       N/A        | 500                 |               |               | |
+| INTOSC (interno) | 16,000,000       | Sí                 | 4 Mhz                    |                500                 |    494 Hz           |               | |
+| HS (cristal externo 16 MHz) | 16,000,000 | No |     NA      |               500                 | 499 Hz              |               |
+| RC externo       | ~16,000,000*     | No                                    |       N/A        | 500                 | 510 Hz               |               | |
 
 #### Tabla 3: Deriva
 
 | Modo de oscilador |RC0 deriva (Hz) |
 |------------------|--------------------|
-| INTOSC (interno) |                    |                
-| HS (cristal externo 16 MHz) |                |                |
-| RC externo       |                 |                
+| INTOSC (interno) |        3 Hz            |                
+| HS (cristal externo 16 MHz) |   0,02 Hz              |                |
+| RC externo       |         39 Hz        |                
 
 
 <!-- Agregar tablas para valores usando PLL -->
@@ -235,7 +256,7 @@ Esta señal puede utilizarse para diferentes aplicaciones, como el parpadeo de u
 <img src="/imagenes/RC.png" alt="esp11" width="450">
 </p>
 <p align="center">
-  Diagrama oscilador externo RC <b>[1]</b>
+  Diagrama oscilador externo RC <b>[2]</b>
 </p>
 
 ## 2.5 Formas de onda
@@ -246,16 +267,16 @@ Esta señal puede utilizarse para diferentes aplicaciones, como el parpadeo de u
 <img src="/imagenes/CRISTAL.png" alt="esp11" width="450">
 </p>
 <p align="center">
- Onda oscilador interno  <b>[1]</b>
+ Onda oscilador interno  <b>[3]</b>
 </p>
 
-### HS
+### Salida RA6 oscilador interno
 
 <p align="center">
 <img src="/imagenes/RA6.png" alt="esp11" width="450">
 </p>
 <p align="center">
-  Onda cristal config HS  <b>[1]</b>
+  Onda cristal config RA6   <b>[1]</b>
 </p>
 
 ## RC
@@ -280,8 +301,23 @@ Esta señal puede utilizarse para diferentes aplicaciones, como el parpadeo de u
 <img src="/imagenes/implementacion.png" alt="esp11" width="450">
 </p>
 <p align="center">
-  Montaje <b>[1]</b>
+  Montaje  oscilador interno <b>[1]</b>
 </p>
+
+<p align="center">
+<img src="/Montaje Crystal.jpeg" alt="esp11" width="450">
+</p>
+<p align="center">
+  Montaje  oscilador externo cristal <b>[1]</b>
+</p>
+
+<p align="center">
+<img src="/Montaje RC.jpeg" alt="esp11" width="450">
+</p>
+<p align="center">
+  Montaje  oscilador externo RC <b>[1]</b>
+</p>
+
 
 
 ## 4. Preguntas
