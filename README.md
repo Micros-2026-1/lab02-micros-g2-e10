@@ -328,7 +328,8 @@ Si tomamos en cuenta que la frecuencia teórica esperada en el pin RC0 es de 500
 </p>
 <p align="center">
   Onda RC salida del RC0 <b>[6]</b>
-</p>
+</p>}
+
 ## 3. Evidencias de implementación
 
 <p align="center">
