@@ -45,7 +45,7 @@ Además, muchas funciones dependen directamente del reloj, como:
 
 **Oscilador interno**
 
-![Datasheet oscilador interno](/imagenes/Osc_int.png)
+![Datasheet oscilador interno](/imagenes/Osc_int.PNG)
 
 El oscilador interno viene integrado dentro del microcontrolador. No necesita resistencias, capacitores ni cristales externos. Se configura por software y permite trabajar a distintas frecuencias.
 
@@ -61,7 +61,7 @@ El oscilador interno viene integrado dentro del microcontrolador. No necesita re
 
 **Oscilador externo cristal de cuarzo**
 
-![Datasheet Crystal](/imagenes/Crystal.png)
+![Datasheet Crystal](/imagenes/Crystal.PNG)
 
 El oscilador Externo de cristal de cuarzo es un material que cuando le aplicas electricidad, vibra  a una frecuencia determinada por el fabricante.
 
@@ -75,7 +75,7 @@ Aunque la mayoría de los microcontroladores tienen un oscilador interno, el ext
 
 **Oscilador externo RC**
 
-![Datasheet RC](/imagenes/Rc_1.png)
+![Datasheet RC](/imagenes/Rc_1.PNG)
 
 El oscilador RC externo utiliza una resistencia (R) y un capacitor (C) conectados a los pines de reloj del sistema para generar la señal periódica. La frecuencia generada depende de los valores de estos dos componentes y puede estimarse con la fórmula aproximada:
 
