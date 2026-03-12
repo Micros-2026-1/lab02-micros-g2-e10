@@ -214,20 +214,18 @@ Esta señal puede utilizarse para diferentes aplicaciones, como el parpadeo de u
 
 | Modo de oscilador | Freq. teórica Fosc | RA6 medible (CLKO)? | Freq. medida RA6 (Hz) | Freq. teórica RC0 (Hz)| Freq. medida RC0 (Hz) | Error RC0 (%) |  
 |------------------|------------------|---------------------|---------------|---------------------|---------------|---------------|
-| INTOSC (interno) | 16,000,000       | Sí                 |   4 MHz      | 500   | 497 Hz              |               | |
-| HS (cristal externo 16 MHz) | 16,000,000 | No |     NA      |               500                 |      499 Hz         |               |
-| RC externo       | ~7,570,000*     | Si                                    |       2,079 MHz        | 500                 |  539 Hz             |               | |
-
-**Analisis Tabla 1**
+| INTOSC (interno) | 16,000,000       | Sí                 |   4 MHz      | 500   | 497 Hz              |   0,6 %            | |
+| HS (cristal externo 16 MHz) | 16,000,000 | No |     NA      |               500                 |      499 Hz         |       0,2 %        |
+| RC externo       | ~7,570,000*     | Si                                    |       2,079 MHz        | 500                 |  539 Hz             |      7,8 %         | |
 
 
 #### Tabla 2: Medición con calor
 
 | Modo de oscilador | Freq. teórica Fosc | RA6 medible (CLKO)? | Freq. medida RA6 (Hz) | Freq. teórica RC0 (Hz)| Freq. medida RC0 (Hz) | Error RC0 (%) |  
 |------------------|------------------|---------------------|---------------|---------------------|---------------|---------------|
-| INTOSC (interno) | 16,000,000       | Sí                 | 4 Mhz                    |                500                 |    494 Hz           |               | |
-| HS (cristal externo 16 MHz) | 16,000,000 | No |     NA      |               500                 | 499 Hz              |               |
-| RC externo       | ~16,000,000*     | No                                    |       N/A        | 500                 | 510 Hz               |               | |
+| INTOSC (interno) | 16,000,000       | Sí                 | 4 Mhz                    |                500                 |    494 Hz           |    1,2 %           | |
+| HS (cristal externo 16 MHz) | 16,000,000 | No |     NA      |               500                 | 499 Hz              |    0,2 %           |
+| RC externo       | ~16,000,000*     | No                                    |       N/A        | 500                 | 510 Hz               |  2,0 %              | |
 
 #### Tabla 3: Deriva
 
@@ -237,6 +235,27 @@ Esta señal puede utilizarse para diferentes aplicaciones, como el parpadeo de u
 | HS (cristal externo 16 MHz) |   0,02 Hz              |                |
 | RC externo       |         39 Hz        |                
 
+**Analisis Tablas 1 y 2**
+
+Al comparar la "Tabla 1" (frío) con la "Tabla 2" (calor), podemos sacar conclusiones muy claras sobre la estabilidad térmica de cada tipo de oscilador:
+
+* HS (Cristal externo - 16 MHz): El más estable:
+El cristal externo demuestra ser la opción más robusta y confiable. El error se mantiene constante en un 0.2% independientemente de si el microcontrolador está frío o caliente. Esto es característico de los cristales de cuarzo, que tienen una excelente estabilidad térmica.
+
+* INTOSC (Oscilador interno): Sensible a la temperatura:
+En frío, tiene un error bastante aceptable del 0.6%. Sin embargo, al aplicar calor, el error se duplica al 1.2% (la frecuencia cae de 497 Hz a 494 Hz). Esto demuestra que las redes de resistencias y capacitores integradas dentro del silicio del microcontrolador varían sus valores con la temperatura, afectando la frecuencia del reloj. Es útil para aplicaciones generales, pero no para medidas de tiempo de alta precisión.
+
+* RC externo (Resistencia-Capacitor): El más impreciso y variable:
+Este modo presenta los errores más altos. En frío tiene un error significativo del 7.8%. Curiosamente, al calentarse, el error se reduce al 2.0%. Esta drástica variación térmica ocurre porque los componentes discretos (resistencias y capacitores) tienen coeficientes de temperatura que alteran su valor físico con el calor. El hecho de que mejorara con el calor en tu prueba depende puramente de los coeficientes específicos de los componentes que usaste, pero reafirma que es el modo menos confiable para aplicaciones críticas.
+
+Como se observa en el modo INTOSC, la frecuencia en el pin RA6 (CLKO) es exactamente una cuarta parte de la frecuencia del oscilador principal (16 MHz / 4 = 4 MHz). Esto confirma que el microcontrolador necesita 4 ciclos de reloj para ejecutar una instrucción (ciclo de máquina).
+
+**Analisis Tablas 3**
+
+Si tomamos en cuenta que la frecuencia teórica esperada en el pin RC0 es de 500 Hz, podemos observar lo siguiente:
+* HS (Cristal externo 16 MHz): Estabilidad absoluta. Con una deriva de apenas 0,02 Hz. Esto confirma por qué los cristales de cuarzo son el estándar de la industria cuando necesitas precisión estricta (por ejemplo, para comunicación serial a altas velocidades, relojes en tiempo real o medición de señales).
+* INTOSC (Oscilador interno): Variación moderada Presenta una deriva de 3 Hz (lo que representa una variación del $0.6\%$ sobre los 500 Hz teóricos). Es una desviación notable en comparación con el cristal, pero completamente aceptable para la mayoría de aplicaciones generales donde la precisión extrema no es crítica (como leer botones, encender pantallas o temporizadores básicos). Su gran ventaja es que ahorra componentes externos y pines.
+* RC externo (Resistencia-Capacitor): Altamente inestableCon una deriva de 39 Hz, este es, con mucha diferencia, el oscilador más errático. Una fluctuación de casi el $8\%$ hace que este modo sea inviable para cualquier tarea que requiera medir o generar tiempos con exactitud. Solo se recomienda usarlo en circuitos muy económicos donde el tiempo no importa en absoluto (por ejemplo, hacer parpadear un LED de advertencia de forma asíncrona).
 
 <!-- Agregar tablas para valores usando PLL -->
 
@@ -339,27 +358,33 @@ Esta señal puede utilizarse para diferentes aplicaciones, como el parpadeo de u
 
 * ¿En qué modo se obtuvo la medición más cercana a la frecuencia teórica?
 
-El modo en el que se obtuvo una frecuencia más cercana a la frecuencia teórica fue el del interno. Esto se debe a que, en las otras configuraciones, se presentan una frecuencia menos precisa e inestable.
+El modo en el que se obtuvo una frecuencia más cercana a la frecuencia teórica fue el del externo con cristal de cuarzo. Esto se debe a que, en las otras configuraciones, se presentan una frecuencia menos precisa e inestable.
 
 * ¿Fue posible evidenciar el fenómeno de deriva? ¿Qué factores podrían explicar la variación de frecuencia al calentar el PIC?
 
+Se pudo evidenciar el fenomeno deriva ta que la evidencia mas viable fue la del oscilador interno ya que la frecuencia cayo de 497 hz a 494 hz solo por el cambio de temperatura que se le ejerce con una pistola de calor a 150 grados celcius.
+
+Otro en el que se pudo evidenciar de manera mas inestable fue el oscilador RC ya que las resistencias y condensadores cambian sus propiedades por la temperatura.
+
+El factor principal se llama Coeficiente de Temperatura. En física y electrónica, los materiales cambian sus propiedades eléctricas cuando su temperatura varía.
+
 * ¿Cuál es más preciso en cuanto a frecuencia teórica vs. medida?
 
+   El mas preciso es el oscilador externo de cristal de cuarzo debido a su cambio minimo y al no verse afectado con los cambios de temperatura. Sin duda es uno de los dispositivos que podemos usar si necesitamos exactitud en los registros de velocidad del oscilador
+
+  * Explique cómo usar RC0 para estimar la frecuencia del oscilador cuando RA6 no está disponible.
+ Se estima desde los registros de ```OSCCON``` que nos permite configurar tanto oscilaciones internas como los osciladores externos y la forma mas exacta seria esa ya que si nuestra constante de frecuencia que aplicamos no coincide con la de mi registro el tiempo cambia drasticamente. Por eso es importante tener en cuenta en el programa que registros introducimos dependiendo la aplicacion que necesitemos.
 
 
-* Explique cómo usar RC0 para estimar la frecuencia del oscilador cuando RA6 no está disponible.
-
-
-
-* Si se quisiera duplicar la frecuencia del PIC usando PLL, ¿en qué modos se podría aplicar?
+  * Si se quisiera duplicar la frecuencia del PIC usando PLL, ¿en qué modos se podría aplicar?
 
     Esta amplificacion de la señal se podria emplear en aquellos modos donde tenemos activo nuestro PLL en este caso seria en la conmfiguracion ``` MODE == 2 ```.
 
-* Enliste ventajas y desventajas de cada modo.
+  * Enliste ventajas y desventajas de cada modo.
 
-* ```Oscilador interno PIC ```
+  * ```Oscilador interno PIC ```
     
-**Ventajas**
+    **Ventajas**
 
    * Menor cantidad de componentes externos, no es necesario utilizar cristal, resonador o red RC externa.
    * Coste reducido del sistema.
@@ -367,16 +392,16 @@ El modo en el que se obtuvo una frecuencia más cercana a la frecuencia teórica
    * Arranque más rápido por sus componentes ya se encuentran integrados.
    * Posibilidad de ajustar la frecuencia por software.
 
-**Desventajas**
+      **Desventajas**
    * Menor precisión en la frecuencia.
    * Frecuencia máxima más limitada
    * Menor estabilidad debido a temperatura, voltaje de alimentación y variaciones del proceso de fabricación.
    * Limitaciones en aplicaciones de alta precisión
 
 
-* ```Oscilador RC ```
+  * ```Oscilador RC ```
 
-     **Ventajas**
+      **Ventajas**
 
     * Los osciladores de desplazamiento de fase RC no requieren ningún tipo de retroalimentación negativa ni disposiciones de estabilización.
     * En el rango de audio, es útil para las frecuencias.
@@ -386,23 +411,23 @@ El modo en el que se obtuvo una frecuencia más cercana a la frecuencia teórica
     * La salida de este circuito es sinusoidal, es decir, tiene poca distorsión.
     * Es adecuado para frecuencias más bajas y este límite inferior existe tan solo en 1 Hz.
     
-    **Desventajas**
+      **Desventajas**
     
     * El oscilador de cambio de fase RC requiere un Vcc alto para una retroalimentación grande.
     * Los osciladores de desplazamiento de fase RC dificultan que el circuito inicie oscilaciones.
     * La salida es pequeña debido a la menor retroalimentación.
     * Tiene poca estabilidad de frecuencia.
 
-* ```Oscilador Cristal Externo ```
+    * ```Oscilador Cristal Externo ```
 
-     **Ventajas**
+      **Ventajas**
 
     * Alta precisión en la frecuencia.
     * Poca variacion en la freciuencia.
     * Adecuado para protocolos de comunicacion precisa.
     * Ideal para trabajos que requieran sincronizacion precisa.
        
-    **Desventajas**
+       **Desventajas**
     
     * Costo elevado por compra de componentes adicionales.
     * Mayor número de componentes.
