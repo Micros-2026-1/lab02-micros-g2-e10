@@ -246,14 +246,14 @@ Esta señal puede utilizarse para diferentes aplicaciones, como el parpadeo de u
 
 
 <p align="center">
-<img src="imagenes/HS.png" alt="esp11" width="450">
+<img src="imagenes/Cr_1.PNG" alt="esp11" width="450">
 </p>
 <p align="center">
   Diagrama oscilador externo HS <b>[1]</b>
 </p>
 
 <p align="center">
-<img src="imagenes/RC.png" alt="esp11" width="450">
+<img src="imagenes/RC_mont1.PNG" alt="esp11" width="450">
 </p>
 <p align="center">
   Diagrama oscilador externo RC <b>[2]</b>
@@ -267,7 +267,7 @@ Esta señal puede utilizarse para diferentes aplicaciones, como el parpadeo de u
 <img src="imagenes/CRISTAL.png" alt="esp11" width="450">
 </p>
 <p align="center">
- Onda oscilador interno  <b>[3]</b>
+ Onda oscilador interno RC0  <b>[1]</b>
 </p>
 
 ### Salida RA6 oscilador interno
@@ -276,7 +276,7 @@ Esta señal puede utilizarse para diferentes aplicaciones, como el parpadeo de u
 <img src="imagenes/RA6.png" alt="esp11" width="450">
 </p>
 <p align="center">
-  Onda cristal config RA6   <b>[1]</b>
+  Onda cristal config RA6   <b>[2]</b>
 </p>
 
 ## RC
@@ -285,16 +285,31 @@ Esta señal puede utilizarse para diferentes aplicaciones, como el parpadeo de u
 <img src="imagenes/salida oscilador 1 rc.png" alt="esp11" width="450">
 </p>
 <p align="center">
-  Onda RC salida OSC 1<b>[1]</b>
+  Onda RC Señal de la entrada del RC<b>[3]</b>
 </p>
 
 <p align="center">
 <img src="imagenes/salida oscilador 2 rc.png" alt="esp11" width="450">
 </p>
 <p align="center">
-  Onda RC salida OSC 2 <b>[1]</b>
+  Onda RC salida del RA6 <b>[4]</b>
 </p>
 
+<p align="center">
+<img src="imagenes/RC_RC0.PNG" alt="esp11" width="450">
+</p>
+<p align="center">
+  Onda RC salida del RC0 <b>[5]</b>
+</p>
+
+## Oscilador externo cristal de cuarzo
+
+<p align="center">
+<img src="imagenes/Crystal_RC0.PNG" alt="esp11" width="450">
+</p>
+<p align="center">
+  Onda RC salida del RC0 <b>[6]</b>
+</p>
 ## 3. Evidencias de implementación
 
 <p align="center">
@@ -308,14 +323,14 @@ Esta señal puede utilizarse para diferentes aplicaciones, como el parpadeo de u
 <img src="imagenes/Crystal_mont.PNG" alt="esp11" width="450">
 </p>
 <p align="center">
-  Montaje  oscilador externo cristal <b>[1]</b>
+  Montaje  oscilador externo cristal <b>[2]</b>
 </p>
 
 <p align="center">
 <img src="imagenes/RC_1montaje.PNG" alt="esp11" width="450">
 </p>
 <p align="center">
-  Montaje  oscilador externo RC <b>[1]</b>
+  Montaje  oscilador externo RC <b>[2]</b>
 </p>
 
 
