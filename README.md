@@ -246,14 +246,14 @@ Esta señal puede utilizarse para diferentes aplicaciones, como el parpadeo de u
 
 
 <p align="center">
-<img src="/imagenes/HS.png" alt="esp11" width="450">
+<img src="imagenes/HS.png" alt="esp11" width="450">
 </p>
 <p align="center">
   Diagrama oscilador externo HS <b>[1]</b>
 </p>
 
 <p align="center">
-<img src="/imagenes/RC.png" alt="esp11" width="450">
+<img src="imagenes/RC.png" alt="esp11" width="450">
 </p>
 <p align="center">
   Diagrama oscilador externo RC <b>[2]</b>
@@ -264,7 +264,7 @@ Esta señal puede utilizarse para diferentes aplicaciones, como el parpadeo de u
 ### INTOSC (interno) 
 
 <p align="center">
-<img src="/imagenes/CRISTAL.png" alt="esp11" width="450">
+<img src="imagenes/CRISTAL.png" alt="esp11" width="450">
 </p>
 <p align="center">
  Onda oscilador interno  <b>[3]</b>
@@ -273,7 +273,7 @@ Esta señal puede utilizarse para diferentes aplicaciones, como el parpadeo de u
 ### Salida RA6 oscilador interno
 
 <p align="center">
-<img src="/imagenes/RA6.png" alt="esp11" width="450">
+<img src="imagenes/RA6.png" alt="esp11" width="450">
 </p>
 <p align="center">
   Onda cristal config RA6   <b>[1]</b>
@@ -282,14 +282,14 @@ Esta señal puede utilizarse para diferentes aplicaciones, como el parpadeo de u
 ## RC
 
 <p align="center">
-<img src="/imagenes/salida oscilador 1 rc.png" alt="esp11" width="450">
+<img src="imagenes/salida oscilador 1 rc.png" alt="esp11" width="450">
 </p>
 <p align="center">
   Onda RC salida OSC 1<b>[1]</b>
 </p>
 
 <p align="center">
-<img src="/imagenes/salida oscilador 2 rc.png" alt="esp11" width="450">
+<img src="imagenes/salida oscilador 2 rc.png" alt="esp11" width="450">
 </p>
 <p align="center">
   Onda RC salida OSC 2 <b>[1]</b>
@@ -298,21 +298,21 @@ Esta señal puede utilizarse para diferentes aplicaciones, como el parpadeo de u
 ## 3. Evidencias de implementación
 
 <p align="center">
-<img src="/imagenes/implementacion.png" alt="esp11" width="450">
+<img src="imagenes/implementacion.png" alt="esp11" width="450">
 </p>
 <p align="center">
   Montaje  oscilador interno <b>[1]</b>
 </p>
 
 <p align="center">
-<img src="/Montaje Crystal.jpeg" alt="esp11" width="450">
+<img src="imagenes/Crystal_mont.PNG" alt="esp11" width="450">
 </p>
 <p align="center">
   Montaje  oscilador externo cristal <b>[1]</b>
 </p>
 
 <p align="center">
-<img src="/Montaje RC.jpeg" alt="esp11" width="450">
+<img src="imagenes/RC_1montaje.PNG" alt="esp11" width="450">
 </p>
 <p align="center">
   Montaje  oscilador externo RC <b>[1]</b>
